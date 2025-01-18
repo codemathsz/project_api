@@ -6,6 +6,8 @@ import br.com.codemathsz.stage.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsersService {
 
@@ -22,5 +24,9 @@ public class UsersService {
                 .role_id(user.role_id())
                 .build();
         return this.repository.save(newUser);
+    }
+
+    public List<Users> findAllUsers(){
+        return this.repository.findAll();
     }
 }
