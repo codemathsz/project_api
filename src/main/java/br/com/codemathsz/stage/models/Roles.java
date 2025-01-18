@@ -2,6 +2,7 @@ package br.com.codemathsz.stage.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -16,5 +17,6 @@ public class Roles {
     @Column(unique = true)
     private String name;
     private Boolean active;
+    @CreationTimestamp
     private LocalDateTime createdAt;
 }
