@@ -10,9 +10,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "users")
 @Data
-public class User {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
