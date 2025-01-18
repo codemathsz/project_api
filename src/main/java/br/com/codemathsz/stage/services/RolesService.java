@@ -5,6 +5,8 @@ import br.com.codemathsz.stage.repositories.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RolesService {
 
@@ -17,5 +19,9 @@ public class RolesService {
                 .name(role.getName().toUpperCase())
                 .build();
         return this.repository.save(newRole);
+    }
+
+    public List<Roles> getAllRoles(){
+        return this.repository.findAll();
     }
 }
