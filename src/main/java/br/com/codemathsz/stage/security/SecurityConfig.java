@@ -9,21 +9,23 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    @Autowired
+    private SecurityFilter securityFilter;
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(auth -> {
-                auth.requestMatchers("/users/").permitAll()
-                .requestMatchers("/users/auth").permitAll()
-                ;
+                auth.requestMatchers("/users/auth").permitAll();
                 auth.anyRequest().authenticated();
             }
-        );
+        ).addFilterBefore(this.securityFilter, BasicAuthenticationFilter.class);
         return http.build();
     }
 

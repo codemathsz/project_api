@@ -59,6 +59,7 @@ public class UsersService {
         return JWT.create()
         .withIssuer("stage")
         .withSubject(user.getId().toString())
+        .withClaim("ROLE", List.of(user.getRole().getName().toUpperCase()))
         .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
         .sign(algorithm);
     }
