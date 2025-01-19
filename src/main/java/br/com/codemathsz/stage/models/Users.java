@@ -25,6 +25,7 @@ public class Users {
     private UUID id;
     private String name;
     @Email(message = "O campo [email] deve conter um email válido")
+    @Column(unique = true)
     private String email;
     private String password;
     private LocalDate birthDate;
