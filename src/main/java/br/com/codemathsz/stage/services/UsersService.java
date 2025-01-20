@@ -15,6 +15,8 @@ import javax.naming.AuthenticationException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UsersService {
@@ -62,5 +64,12 @@ public class UsersService {
         .withClaim("ROLE", List.of(user.getRole().getName().toUpperCase()))
         .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
         .sign(algorithm);
+    }
+
+    public Users findById(String id){
+        var user = this.repository.findById(UUID.fromString(id)).orElseThrow(
+                () -> new RuntimeException("user not found")
+        );
+        return user;
     }
 }

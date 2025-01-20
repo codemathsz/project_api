@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UsersController {
@@ -33,8 +34,15 @@ public class UsersController {
         return ResponseEntity.ok().body(users);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Users> getUserById(@PathVariable String id){
+        var users = this.service.findById(id);
+        return ResponseEntity.ok().body(users);
+    }
+
     @PostMapping("/auth")
     public ResponseEntity<Object> auth(@RequestBody UserAuthenticationDTO authenticationDTO){
+        System.out.println("CHAMOU"+ authenticationDTO);
         try{
             var token = this.service.authUser(authenticationDTO);
             return ResponseEntity.ok().body(token);
