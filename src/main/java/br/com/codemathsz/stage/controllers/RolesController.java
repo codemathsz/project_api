@@ -1,6 +1,6 @@
 package br.com.codemathsz.stage.controllers;
 
-import br.com.codemathsz.stage.models.Roles;
+import br.com.codemathsz.stage.models.Role;
 import br.com.codemathsz.stage.services.RolesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,14 +17,14 @@ public class RolesController {
     private RolesService service;
 
     @PostMapping("/")
-    public ResponseEntity<Roles> createRole(@RequestBody Roles role){
+    public ResponseEntity<Role> createRole(@RequestBody Role role){
         var newRole = this.service.create(role);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newRole);
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Roles>> roles(){
+    public ResponseEntity<List<Role>> roles(){
         var allRoles = this.service.getAllRoles();
         return ResponseEntity.ok().body(allRoles);
     }

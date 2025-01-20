@@ -10,12 +10,12 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "roles")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Roles {
+public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -24,5 +24,6 @@ public class Roles {
     private String name;
     private Boolean active;
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 }
