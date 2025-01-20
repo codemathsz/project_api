@@ -11,6 +11,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "users")
@@ -18,7 +19,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -27,6 +28,7 @@ public class Users {
     @Email(message = "O campo [email] deve conter um email válido")
     @Column(unique = true)
     private String email;
+    @Column(nullable = false)
     private String password;
     private LocalDate birthDate;
     @Column(unique = true)
@@ -35,12 +37,16 @@ public class Users {
 
     @OneToOne
     @JoinColumn(name = "role_id", insertable = false, updatable = false)
-    private Roles role;
+    private Role role;
     @Column(name = "role_id", nullable = false)
     private UUID role_id;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Project> projects;
 }
