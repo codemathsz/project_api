@@ -2,7 +2,7 @@ package br.com.codemathsz.stage.services;
 
 import br.com.codemathsz.stage.dtos.CreateUserDTO;
 import br.com.codemathsz.stage.dtos.UserAuthenticationDTO;
-import br.com.codemathsz.stage.models.Users;
+import br.com.codemathsz.stage.models.User;
 import br.com.codemathsz.stage.repositories.UsersRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -15,7 +15,6 @@ import javax.naming.AuthenticationException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,8 +29,8 @@ public class UsersService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public Users createUser(CreateUserDTO user){
-        var newUser = Users.builder()
+    public User createUser(CreateUserDTO user){
+        var newUser = User.builder()
                 .name(user.name())
                 .email(user.email())
                 .password(passwordEncoder.encode(user.password()))
@@ -42,7 +41,7 @@ public class UsersService {
         return this.repository.save(newUser);
     }
 
-    public List<Users> findAllUsers(){
+    public List<User> findAllUsers(){
         return this.repository.findAll();
     }
 
@@ -66,7 +65,7 @@ public class UsersService {
         .sign(algorithm);
     }
 
-    public Users findById(String id){
+    public User findById(String id){
         var user = this.repository.findById(UUID.fromString(id)).orElseThrow(
                 () -> new RuntimeException("user not found")
         );

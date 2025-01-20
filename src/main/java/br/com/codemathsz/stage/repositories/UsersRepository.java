@@ -1,12 +1,12 @@
 package br.com.codemathsz.stage.repositories;
 
-import br.com.codemathsz.stage.models.Users;
+import br.com.codemathsz.stage.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UsersRepository extends JpaRepository<Users, UUID> {
+public interface UsersRepository extends JpaRepository<User, UUID> {
 
-    Optional<Users> findByEmail(String email);
+    Optional<User> findByEmail(String email);
 }
