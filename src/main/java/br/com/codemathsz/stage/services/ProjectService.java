@@ -5,6 +5,8 @@ import br.com.codemathsz.stage.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProjectService {
 
@@ -13,5 +15,9 @@ public class ProjectService {
 
     public Project save(Project newProject){
         return this.repository.save(newProject);
+    }
+
+    public List<Project> findAll(){
+        return this.repository.findAll();
     }
 }
