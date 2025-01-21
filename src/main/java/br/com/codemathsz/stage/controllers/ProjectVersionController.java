@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/project/version")
+@RequestMapping("/api/project")
 public class ProjectVersionController {
 
     @Autowired
     private ProjectVersionService service;
 
-    @PostMapping("/")
+    @PostMapping("/version")
     public ResponseEntity<ProjectVersion> create(@RequestBody CreateProjectVersionDTO projectVersionDTO){
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(this.service.create(projectVersionDTO));
