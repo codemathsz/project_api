@@ -19,8 +19,10 @@ public class Project {
     private String cod;
 
     @ManyToOne()
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
+    @Column(name = "user_id", nullable = false)
+    private UUID userId;
 
     @CreationTimestamp
     @Column(updatable = false, nullable = false)
