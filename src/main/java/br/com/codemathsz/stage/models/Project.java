@@ -2,7 +2,10 @@ package br.com.codemathsz.stage.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -11,6 +14,9 @@ import java.util.UUID;
 
 @Entity(name = "project")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Project {
 
     @Id
