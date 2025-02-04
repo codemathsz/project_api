@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -36,6 +37,7 @@ public class ProjectVersion {
     private String city;
     private String state;
 
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
     @Column(name = "start_date")
     private LocalDate startDate;
