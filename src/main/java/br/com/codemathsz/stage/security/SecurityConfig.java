@@ -23,36 +23,18 @@ public class SecurityConfig {
     @Autowired
     private SecurityFilter securityFilter;
 
-    @Autowired
-    private CorsFilter corsFilter;
-
-
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
-                            auth.requestMatchers("/*").permitAll();
                             auth.requestMatchers("/users/auth").permitAll();
                             auth.anyRequest().authenticated();
                         }
                 )
-                .addFilterBefore(corsFilter, BasicAuthenticationFilter.class)
                 .addFilterBefore(this.securityFilter, BasicAuthenticationFilter.class)
         ;
 
         return http.build();
-    }
-
-
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
     }
 
     @Bean
