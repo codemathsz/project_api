@@ -56,12 +56,15 @@ public class UsersService {
             throw  new AuthenticationException();
         }
 
+        Instant now = Instant.now();
+        Instant expiresAt = now.plus(Duration.ofDays(7));
+
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
         return JWT.create()
         .withIssuer("stage")
         .withSubject(user.getId().toString())
         .withClaim("ROLE", List.of(user.getRole().getName().toUpperCase()))
-        .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
+        .withExpiresAt(expiresAt)
         .sign(algorithm);
     }
 
