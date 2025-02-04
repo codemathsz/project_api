@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/project")
 public class ProjectController {
 
@@ -38,5 +39,10 @@ public class ProjectController {
     public ResponseEntity<List<Project>> getProjects(){
         var projects = this.service.findAll();
         return ResponseEntity.ok().body(projects);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Project> softDelete(@PathVariable String id){
+        return ResponseEntity.ok().body(this.service.softDelete(id));
     }
 }

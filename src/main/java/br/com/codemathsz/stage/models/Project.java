@@ -36,6 +36,7 @@ public class Project {
     @Column(updatable = false, nullable = false)
     private LocalDateTime createdAt;
 
+    private LocalDateTime deletedAt;
     @OneToMany(mappedBy = "project")
     private List<ProjectVersion> versions;
 }
