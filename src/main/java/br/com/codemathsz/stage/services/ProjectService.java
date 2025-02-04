@@ -1,6 +1,8 @@
 package br.com.codemathsz.stage.services;
 
 import br.com.codemathsz.stage.dtos.CreateProjectDTO;
+import br.com.codemathsz.stage.dtos.UpdateProjectDTO;
+import br.com.codemathsz.stage.exceptions.ProjectNotFoundException;
 import br.com.codemathsz.stage.models.Project;
 import br.com.codemathsz.stage.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,12 @@ public class ProjectService {
                 .userId(projectDTO.userId())
                 .build();
         return this.repository.save(newProject);
+    }
+
+    public Project update(String id, UpdateProjectDTO updateProjectDTO){
+        var project = this.repository.findById(UUID.fromString(id)).orElseThrow(ProjectNotFoundException::new);
+        project.setCod(updateProjectDTO.cod());
+        return this.repository.save(project);
     }
 
     public List<Project> findAll(){
