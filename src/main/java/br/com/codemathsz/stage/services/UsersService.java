@@ -47,7 +47,7 @@ public class UsersService {
 
     public String authUser(UserAuthenticationDTO authenticationDTO) throws AuthenticationException{
         var user = this.repository.findByEmail(authenticationDTO.email()).orElseThrow(
-            () -> new RuntimeException("email/password incorrect")
+            () -> new RuntimeException("E-mail ou senha incorreto.")
         );
 
         var passwordMatches = this.passwordEncoder.matches(authenticationDTO.password(), user.getPassword());
