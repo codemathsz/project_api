@@ -32,10 +32,6 @@ public class ProjectService {
         return this.repository.save(project);
     }
 
-    public List<Project> findAll(){
-        return this.repository.findAll();
-    }
-
     public List<Project> findByUserId(String userId){
         return this.repository.findByUserId(UUID.fromString(userId)).orElseThrow(
             () -> new RuntimeException("User not found")
@@ -46,6 +42,10 @@ public class ProjectService {
         return this.repository.findById(UUID.fromString(id)).orElseThrow(
             () -> new RuntimeException("Project not found")
         );
+    }
+
+    public List<Project> findByCod(String filter){
+        return this.repository.findByCodContainingIgnoreCase(filter);
     }
 
     public Project softDelete(String id){

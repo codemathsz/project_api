@@ -25,6 +25,12 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @GetMapping("/")
+    public ResponseEntity<List<Project>> filterProjectByCod(@RequestParam String filter){
+        var projects = service.findByCod(filter);
+        return ResponseEntity.ok().body(projects);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateProject(@PathVariable String id, @RequestBody UpdateProjectDTO newProject){
         var response = this.service.update(id,newProject);
@@ -35,6 +41,11 @@ public class ProjectController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Project> softDelete(@PathVariable String id){
+        return ResponseEntity.ok().body(this.service.softDelete(id));
+    }
+
     @GetMapping("/id/{id}")
     public ResponseEntity<Project> getProjectById(@PathVariable String id){
         var project = this.service.findById(id);
@@ -42,18 +53,7 @@ public class ProjectController {
     }
 
     @GetMapping("/userId/{userId}")
-    public ResponseEntity<List<Project>> getProjectByUserId(@PathVariable String userId){
+    public ResponseEntity<List<Project>> getProjectByUserId(@PathVariable String userId) {
         return ResponseEntity.ok().body(this.service.findByUserId(userId));
-    }
-
-    @GetMapping("/")
-    public ResponseEntity<List<Project>> getProjects(){
-        var projects = this.service.findAll();
-        return ResponseEntity.ok().body(projects);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Project> softDelete(@PathVariable String id){
-        return ResponseEntity.ok().body(this.service.softDelete(id));
     }
 }

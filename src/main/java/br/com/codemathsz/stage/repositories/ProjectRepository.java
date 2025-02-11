@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface ProjectRepository extends JpaRepository<Project, UUID> {
 
     Optional<List<Project>> findByUserId(UUID userId);
+
+    List<Project> findByCodContainingIgnoreCase(String filter);
 }
