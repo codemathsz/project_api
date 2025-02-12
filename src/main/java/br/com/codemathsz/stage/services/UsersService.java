@@ -2,6 +2,7 @@ package br.com.codemathsz.stage.services;
 
 import br.com.codemathsz.stage.dtos.CreateUserDTO;
 import br.com.codemathsz.stage.dtos.UserAuthenticationDTO;
+import br.com.codemathsz.stage.exceptions.UserNotFoundException;
 import br.com.codemathsz.stage.models.User;
 import br.com.codemathsz.stage.repositories.UsersRepository;
 import com.auth0.jwt.JWT;
@@ -69,9 +70,6 @@ public class UsersService {
     }
 
     public User findById(String id){
-        var user = this.repository.findById(UUID.fromString(id)).orElseThrow(
-                () -> new RuntimeException("user not found")
-        );
-        return user;
+        return this.repository.findById(UUID.fromString(id)).orElseThrow(UserNotFoundException::new);
     }
 }
