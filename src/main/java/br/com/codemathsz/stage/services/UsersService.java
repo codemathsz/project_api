@@ -2,6 +2,7 @@ package br.com.codemathsz.stage.services;
 
 import br.com.codemathsz.stage.dtos.CreateUserDTO;
 import br.com.codemathsz.stage.dtos.UserAuthenticationDTO;
+import br.com.codemathsz.stage.exceptions.LoginHandlerException;
 import br.com.codemathsz.stage.exceptions.UserNotFoundException;
 import br.com.codemathsz.stage.models.User;
 import br.com.codemathsz.stage.repositories.UsersRepository;
@@ -47,9 +48,7 @@ public class UsersService {
     }
 
     public String authUser(UserAuthenticationDTO authenticationDTO) throws AuthenticationException{
-        var user = this.repository.findByEmail(authenticationDTO.email()).orElseThrow(
-            () -> new RuntimeException("E-mail ou senha incorreto.")
-        );
+        var user = this.repository.findByEmail(authenticationDTO.email()).orElseThrow(LoginHandlerException::new);
 
         var passwordMatches = this.passwordEncoder.matches(authenticationDTO.password(), user.getPassword());
 
