@@ -15,7 +15,7 @@ public class RolesService {
 
     public Role create(Role role){
         var newRole = Role.builder()
-                .active(role.getActive() == null)
+                .active(role.getActive() != null ? role.getActive() : true)
                 .name(role.getName().toUpperCase())
                 .build();
         return this.repository.save(newRole);
