@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin
@@ -26,8 +27,8 @@ public class ProjectController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Project>> filterProjectByCod(@RequestParam String filter){
-        var projects = service.findByCod(filter);
+    public ResponseEntity<List<Project>> filterProjectByCod(@RequestParam String filter, @RequestBody UUID userId){
+        var projects = service.findByCod(filter, userId);
         return ResponseEntity.ok().body(projects);
     }
 

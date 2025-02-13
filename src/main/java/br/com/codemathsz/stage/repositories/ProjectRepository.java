@@ -11,5 +11,5 @@ public interface ProjectRepository extends JpaRepository<Project, UUID> {
 
     Optional<List<Project>> findByUserId(UUID userId);
 
-    List<Project> findByCodContainingIgnoreCase(String filter);
+    List<Project> findByCodContainingIgnoreCaseAndUserId(String filter, UUID userId);
 }

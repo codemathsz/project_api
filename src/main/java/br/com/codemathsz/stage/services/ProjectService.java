@@ -44,8 +44,8 @@ public class ProjectService {
         );
     }
 
-    public List<Project> findByCod(String filter){
-        return this.repository.findByCodContainingIgnoreCase(filter);
+    public List<Project> findByCod(String filter, UUID userId){
+        return this.repository.findByCodContainingIgnoreCaseAndUserId(filter, userId);
     }
 
     public Project softDelete(String id){
