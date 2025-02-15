@@ -41,10 +41,10 @@ jobs:
             # Clona ou atualiza o repositório
             if [ ! -d .git ]; then
               git init
-              git remote add origin git@github.com:polivetti/dz-autochat.git
+              git remote add origin git@github.com:codemathsz/project_api.git
             fi
-            git fetch origin prod
-            git reset --hard origin/prod
+            git fetch origin main
+            git reset --hard origin/main
             
             # Faz deploy com Docker Compose
             docker-compose down
