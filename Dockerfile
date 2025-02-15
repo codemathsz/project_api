@@ -14,4 +14,4 @@ WORKDIR /app
 COPY --from=build /app/target/stage-0.0.1.jar app.jar
 EXPOSE 8080
 # O comando de inicialização será sobrescrito no docker-compose
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-Xmx256m", "-Xms128m", "-XX:+UseSerialGC", "-XX:MaxMetaspaceSize=128m", "-jar", "app.jar"]

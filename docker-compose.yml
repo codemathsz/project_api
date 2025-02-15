@@ -32,7 +32,8 @@ services:
       db:
         condition: service_healthy
     # Aqui o comando de inicialização (que utiliza a conexão com o DB) é executado em runtime
-    command: ["java", "-jar", "app.jar"]
+    command: ["java", "-Xmx256m", "-Xms128m", "-XX:+UseSerialGC", "-XX:MaxMetaspaceSize=128m", "-jar", "app.jar"]
+
 
 networks:
   app-network:
