@@ -19,7 +19,7 @@ jobs:
         with:
           host: ${{ secrets.DO_HOST }}
           username: ${{ secrets.DO_USER }}
-          password: ${{ secrets.DO_PASSWORD }}
+          key: ${{ secrets.DO_SSH_PRIVATE_KEY }}
           port: 22
           script: |
             # Certifique-se de que Docker está instalado
