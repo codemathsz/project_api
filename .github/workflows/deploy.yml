@@ -35,18 +35,16 @@ jobs:
             fi
             
             # Cria a pasta do projeto
-            mkdir -p ~/soft-stage
-            cd ~/soft-stage
+            mkdir -p ~/stage
+            cd ~/stage
             
-            # Clona o repositório
+            # Clona ou atualiza o repositório
             if [ ! -d .git ]; then
-              git clone git@github.com:codemathsz/project_api.git .
-            else
-              git fetch origin main
-              git reset --hard origin/main
+              git init
+              git remote add origin git@github.com:polivetti/dz-autochat.git
             fi
-            git fetch origin main
-            git reset --hard origin/main
+            git fetch origin prod
+            git reset --hard origin/prod
             
             # Faz deploy com Docker Compose
             docker-compose down
